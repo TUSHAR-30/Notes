@@ -1,0 +1,5 @@
+1) git log --oneline 
+
+2) Press q for exit (if we stuck at git diff or git log)
+
+3) Press esc key and ZZ to save and exit (if we stuck at commit message without giving the commit name)

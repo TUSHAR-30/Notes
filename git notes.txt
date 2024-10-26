@@ -1,5 +1,62 @@
-1) git log --oneline 
+git config --global user.name "john doe"
+git config --global user.email "xyz@gmail.com"
 
-2) Press q for exit (if we stuck at git diff or git log)
 
-3) Press esc key and ZZ to save and exit (if we stuck at commit message without giving the commit name)
+The purpose of git init is to create local repository.
+
+After creating a local repository using git init; then a .git folder is created and that .git folder is a hidden folder .We can know that the newly created folder is hidden or not by seeing that the newly folder created has . in starting.
+
+Whenever we do git init command then by default a branch is created with name master.
+
+Suppose,by mistake we have created a local repository in wrong folder then in order to delete that local repository we can use the command rm -rf .git/
+or we can simply delete that folder 
+
+If we want to change the name of that branch then we can use the command git init --initial-branch=yourbranchname   
+(We cannot change the branch name using this command if we have already initialized a local repository which means that this command will only work when we initializing our repository for the very first time and want different name of the branch)
+
+Whenever we create a new file inside our local repository , the file goes in non-staging area
+
+The purpose of git status is to tell which file is in staging area and which is in non-staging area
+There are two attributes associated with git status.The first is v which means verbose and second is s which means short.The git status -v gives detailed output and git status -s gives short ouput
+
+The purpose of git add file-name command is to bring a file from non-staging area to the staging area.And if we want to add all the files of non-staging area into stagin area then we can use git add . command
+If we want to remove the file from staging area then we can use the command git rm --cached file-name 
+
+Even if the file is in staging area it doesn't mean that git is tracking the file and it means that the git is only aware about the content of the file only . And that means that in future if we delete that file then there is no way to recover that file.And in order to track a file we need to use git commit command and the files which are present in the staging area goes to tracked files.
+
+If we created a empty folder inside our local repository folder then git doesnot track our folder and even that empty folder is not present in our non-staging area.So in order to put our folder in non-staging area we need to add some files into it
+
+Whenever we do a git commit then a commit object is created and it contains 4 things:Who has done the commit,When the commit has done,Message of the commit,and The snapshot of files in the staging area
+Each commit which has created has a commit id of 40 letters which is created using SHA1 technique(Secure Hashing Algorithm One) and our HEAD points to the latest commit
+The newly created commit is created using the reference of previous commit (This does not apply for the first commit as first commit is the only commit in local repository) 
+
+If we have modified our tracked file then the file goes in unstaged area and in that case the git status command show us modified . And in order to tell the git to track the latest version of file then we need to again add that file in staging area and need to do a commit by using earlier commands git add file-name and git commit -m "message"
+But if we want to make this thing happen in one command then we can use command git commit -a -m "message"(This command will only work for modified tracked files to add the file in staging area and then in applying commit )
+
+If we have our file in staging area and then if we modified it and if we then done a commit and commit will be done successfully but the staged file will go in tracking stage but its modified content will not be tracked and if we again check the git status command then we will find that modified file.
+
+So,from the above 2 points we concluded that if the file is present in staging area then no matter what if we done git commit command then the staged file will be go in tracking stage and if the modified content is present in nonstaging area earlier then it will not be tracked.
+
+If we want to make changes in the last commit without creating another commit then we can do that by first putting the staged or unstaged or modified file in the staging area and then need to write command git commit --amend and by writing this command the vi editor will open and we need to write commit message there.But we want to keep the commit message as same then we can write command git commit --amend --no-edit
+
+In order to do a commit  we have to add some file and then we can able to do a commit but it is not true because we can do a empty commit also in which we do not need to add some file and we can simply do a commit by using command git commit --allow-empty -m "your-message"
+
+git log -n numberofcommitsyouwanttosee is a command to get only specific number of commits
+
+There are 2 ways to undo our commits from local repository:-The one is using reset and other is revert.
+
+git reset --soft commitid (This will change the head to the mentioned commitid in the which we have given in the command and our changes will go in the staging area and our file will be shown as modified  )
+
+git reset --mixed commitid (This will change the head to the mentioned commitid in the which we have given in the command and our changes will go in the non-staging area and our file will be shown as modified  )
+
+git reset --hard commitid (This will change the head to the mentioned commitid in the which we have given in the command and our changes will be deleted permanently )
+
+git reset commitid (This will change the head to the mentioned commitid in the which we have given in the command and our changes will go in the non-staging area and our file will be shown as modified  )(This is the default behaviour of reset command which is mixed)
+
+get revert commitid(This command will undo the changes of the mention commitid of the command and created a new commit which has all the things excluding the files of the mentioned commitid)(Do not use this command to remove the nonHead commit in which we have modified our tracked file.)
+
+We should use git revert over the git reset because When you are working in a public repository or when you are working in a collaborative environment we want to make sure that we should not lose the history of changes .
+But if we are working in a private project alone then we can use git reset as it is not going to affect any other person
+
+
+

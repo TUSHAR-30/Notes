@@ -1,0 +1,101 @@
+				EXPRESS
+
+const express=require("express");
+const app=expess();
+
+app.get('/',(req,res)=>{
+	res.send("hello");
+})
+
+app.listen(3000,()=>{console.log("Server is listening at port 3000")});
+
+
+
+-> If we pass js object as the response in res.send funtion , then it will be stringyfy by express automatically and we will get json as response in browser.
+
+-> We can also pass html elements as response in send function but only one send function will be executed in the  get method .
+	example: res.send("<h1>This is first response</h1>");
+		 res.send("<h1>This is second response</h1>");
+
+	  But, only the 1st send function will be executed, In order to pass multile html elements we can use write  function as many times as we want . But we need to write send funtion after writting all the write function  because express was expecting the send function in the end.
+
+	example: res.write("<h1>This is first response</h1>");
+		 res.write("<h1>This is second response</h1>");
+		 res.send();
+
+
+
+->In order to send the whole html file which should be static ; we need to use built in middleware function of express which is express.static()
+	example:
+		const staticPath=path.join(__dirname,"..name of folder that contains html file");
+		app.use(express.static(staticPath));
+
+	The expess.static function will only run the file named index.html , so we need to take care of the fact that we should create our html file         	with named only index.html in the folder.
+
+
+->In order to load the file which is dynamic we have to install any  template engine . As of now we are using handlebars template engine which is also called as hbs.(npm i hbs)
+     We need to create one exact folder named views and that folder can contain the dynamic file which has      extension .hbs (.hbs file is same as html         file but we need create only .hbs file inside this folder.)
+
+	example:
+	
+		app.set("view engine","hbs");
+		app.get('/',(req,res)=>{
+    			res.render("home")
+		});
+
+		Here we can render any hbs file inside the res.render function. But first we need to set the view engine as hbs.
+
+		Also the strictness of creating folder named view can be removed by using app.set() which means we can place our hbs file inside any folder 		name other than views folder name 
+		example:
+			const templatePath=path.join(__dirname,"../ name of the folder in which you have placed hbs file");
+			 app.set("views",templatePath)
+
+	So far we are discussing about dynamic file here But what the dynamicity is here as it seems same as static file . So we can pass any dynamic data 	also inside the res.sender function as second argument in the form of object.
+	 	example:
+				app.get('/',(req,res)=>{
+    					res.render("index",{
+        					name:"successfully"
+   					 })
+				});
+
+	Here the name key can be used inside the .hbs file anywhere inside the curly brackets.
+	example in (index.hbs file )
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+   		<meta charset="UTF-8">
+    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Document</title>
+		</head>
+		<body>
+   
+    		<h1>Dynamic File loaded {{name}}</h1>
+    		<h2>You are on home pages</h2>
+		</body>
+		</html>
+
+	You can see that i have used {{name}} in h1 heading . Now in browser in the first heading we will see successfully in place of {{name}}.
+
+
+-> Partials :- In dynamic file we can use partials which means that on routing to different pages if we want to display any same thing on many routes then we can achieve this by using paritals . Also we can do without patials but it will increase code repetition on all code bases.
+	In order to use partials we need to use registerPartials function of hbs specifying the path of partials folder inside the registeerPartials method.
+	First we need to import hbs and then we can use register partials.
+
+       example:(in the app.js file from where we are running our node file)
+
+		const hbs=require("hbs");
+		const partialPath=path.join(__dirname,"../template/partials");
+		hbs.registerPartials(partialPath);
+
+
+		WE can have to create the folder named partials inside template folder and here we can place our code which is repeating across all 				codebases with any file name.hbs
+
+
+			
+		
+		
+
+	
+
+	
+

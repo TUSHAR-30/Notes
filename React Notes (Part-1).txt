@@ -1,0 +1,39 @@
+Why component name is in Pascal case and what happen if we do not follow it
+Also can we name our js file in lowercase or need to be pascalcase.
+
+Why we don't need to export the css file
+
+
+
+Learning:-
+create-react-app is a tool through which we can create our react app and also it provides various files which we can use to  develop the react app and provide some files for production purpose 
+
+Also it provides us the ability to start our development server by writing npm start and later on if we do any changes we don't need to write that command again. We just need to save our code by pressing Ctrl*S.
+
+So in terms of starting our development server , how does the create-react-app is different from live server as I can do the same from live server also.
+The difference is that I can start my development server even in CLI but to do it same with live server I need to open vs code and then need to start the live server.
+
+
+I don't know earlier that we can write the html code inside the js by wrapping it inside the double commas.
+But in react app we can write the html code by using jsx and don't need to wrap in double quotes .
+Also we can write any expression inside our jsx by wrapping that expression inside { } brackets.
+JSX follow XML , so in jsx every should contain starting as well as ending tag.
+The Babel is the modern js compiler which converts the jsx into js
+
+
+ We can't use class keyword in jsx for mentioning the classes of element ; instead we have to use class name keyword because our jsx code is first converted into js by babale and in js class is a reserved keyword .
+
+
+In react;  we can assign jsx to variable , return the jsx
+
+In react, some of the attributes of jsx elements works different .some of them are:- 
+
+*style*- it expects object as its value so assigning a string value doean' work here.
+*src*- if we are fetching our image from browser the there is no change but if our image is present locally in system then we need to use such syntax
+ src={require("img path")}
+If we place our images in public folder than we need not to use the require function but if images are present in any other component or folder then we need to use require method
+ The require method expects only string inside it. So if we are trying to pass the key of object into the require method which is passed via props in child component ; then even if the value of that key is in string it is not going to work.
+To solve this problem,
+1)  We can assign the value of key by wrapping inside the require method in the parent component and then we can pass it to child component.
+2) We can concatenate the empty string with the object key inside the require method in the child component.
+3) Simply we can store all our images inside the public folder, then we do not require to use require method.

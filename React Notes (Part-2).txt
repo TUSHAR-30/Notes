@@ -1,0 +1,58 @@
+						React (part-2)
+Basics:-
+	state(class component)
+	props
+	List rendering
+	Styling
+
+Hooks:-
+	useState  	(for creating states)
+	useEffect 	(to do operations on rendering)
+	useContext 	(to pass props from parent to child component)
+	useMemo		(for code optimization)
+	useCallback  	(for code optimization)
+	useReducer	(similar like usestate)
+	useRef		(to perform operatins inside useEffect )
+	Custom Hooks	(creation of own hooks such that it reduces code repeation)
+
+Router:-.We need to import react-router-dom first .
+	.In the index.js file we need to import the {BroweserRouter} from 'react-router-dom' in index.js file and need to  wrap the app component by Brouser 	Router component.
+	.We need to import the {Routes,Route}from react-router-dom in app.js file.
+	.After that in app.js file , we need to make Routes component and now we can place any number of Route component inside Routes component .
+	.In the Route component we need to use path attribute and give it a path value . Also we need to use second attribute called element with value 		equals to {Name of the Route component}
+
+	Example:(App.js)
+	
+	import {Routes,Route} from 'react-router-dom'
+	import {About} from './components/About'
+	import {Home}from './components/Home'
+
+	function App(){
+		return(
+			<Routes>
+				<Route path='/' element={<Home> /} </Route}
+				<Route path='about' element={<About> /} </Route}
+			</Routes>
+		)
+	}
+	export default App
+	
+	
+
+
+
+	Routes,Route
+
+	Links and Navlink
+
+	Navigating programatically through useNavigate hook ( which means clicking on button,or other element navigate us on other path)
+
+	no match route ( it is done by puting * in the Route path and it will be invoked if no match path is found on url)
+
+	Nested routes(by placing a nested route inside the parent route in app.js file and use Outlet tag in order to display the nested route in the parent 	route .)
+	
+	Indexed route( for showing any child route inside the parent route automatically when user clicks on parent route )(and we can do it by making one 		more route in the parent route in app.js and instead of using path atribute  we will use index attribute which automatically capture the parent 		route path)
+	
+	Dynamic routes 
+	
+

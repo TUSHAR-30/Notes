@@ -1,0 +1,58 @@
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, default: 'user' }, // Default field
+});
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  // Encrypt the password
+  this.password = await bcrypt.hash(this.password, 12);
+
+  next();
+});
+
+
+
+
+const user = new User({
+  name: "John",
+  email: "john@example.com",
+  password: "plaintextPassword",
+});
+
+// Call save
+await user.save();
+
+
+
+What Happens Internally:
+Validation:
+
+Mongoose validates:
+name is present ✅
+email is present and unique ✅
+password is present ✅
+Default Values:
+
+The role field is assigned its default value 'user'.
+Tracking Modified Fields:
+
+Mongoose tracks fields that were explicitly assigned:
+password was explicitly set (password: "plaintextPassword"), so it is marked as modified.
+Default fields like role are not modified unless explicitly changed.
+Pre-save Middleware:
+
+this.isModified('password') returns true because password was explicitly set during document creation.
+The password field is hashed.
+Document Saved:
+
+The password is stored as a hashed value.
+The role field retains its default value 'user'.
+
+
+
+Also,If the explicitly provided value matches the default value in the schema, the field is not considered modified in the pre('save') middleware unless you explicitly mark it as modified
+

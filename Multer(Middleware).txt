@@ -1,0 +1,21 @@
+//Procedure for getting the files from the user.
+// Store the file in server.
+// Store the same file in cloudinary.
+// Add the url returned by cloudinary in the database.
+// Delete the file from server.
+
+
+
+
+// To send files through a form, you need to use the multipart/form-data encoding type. This encoding allows for both binary data (like files) and text data (like input fields) to be properly packaged and transmitted.
+
+// For the server to handle the file, you'll need middleware to parse multipart/form-data. For example, in Node.js with Express, you can use the multer package to handle file uploads.
+// After using multer, the rest of the form data (non-file data) will be available in req.body as usual.
+
+// .Also in order to save the file with prefix random value + file name ; we can either use Math.random or we can use vvid here.
+
+// In order to save this server stored file in cloudinary, we need cloudinary.
+
+// In order to save the url returned by cloudinary for the file in the mongodb database, we will use mongoose.
+
+// In order to delete the file from server  we need nodejs inbuilt module "fs" which will delete file from server.

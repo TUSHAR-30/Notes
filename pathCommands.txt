@@ -1,0 +1,6 @@
+Go to home directory , there are 2 methods
+1. cd ~
+2. cd
+
+Go to root directory, we use cd /
+
